@@ -23,6 +23,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var profileList : [Profile]?
     @IBOutlet weak var tableProfile: UITableView!
+    let imageCache = NSCache<AnyObject, AnyObject>()
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -30,29 +31,37 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let tableCell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! CustomTableViewCell
         
         let profile = profileList?[indexPath.row]
-        
+        let strUrl = (profile?.image)!
+
         tableCell.labelName.text = "\( (profile?.fname)! ) \((profile?.lname)!)"
         tableCell.labelAddress.text = profile?.address!
         
-        let url = URL(string: (profile?.image)!)
+        if let imageFromCache = imageCache.object(forKey: strUrl as AnyObject) as? UIImage {
+            print("Image taken from cache @ \(strUrl)")
+            tableCell.imageProfile.image = imageFromCache
+        } else {
+            
+            let url = URL(string: strUrl)
         
-        URLSession.shared.dataTask(with: url!) {
-            (data,response,error) in
+            URLSession.shared.dataTask(with: url!) {
+                (data,response,error) in
             
-            if error != nil {
-                print(error!)
-                return
-            }
+                    if error != nil {
+                        print(error!)
+                        return
+                    }
             
-            DispatchQueue.main.async {
-                tableCell.imageProfile.image = UIImage(data: data!)
-            }
+                    DispatchQueue.main.async {
+                    let imageToCache = UIImage(data: data!)
+                        //print("key is \(profile?.image)!)")
+                        self.imageCache.setObject(imageToCache!, forKey: strUrl as AnyObject)
+                        // TODO: In some scenario strurl was unwrapped a nil value need to correct this ...
+                        print("Image stored in cache @ \(strUrl)")
+                        tableCell.imageProfile.image = imageToCache
+                    }
             
-            
-            
-            
-        }.resume()
-        
+                }.resume()
+        }
         
         return tableCell
     }
@@ -99,9 +108,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         let lname = dictionary["lname"] as! String
                         let address = dictionary["address"] as! String
                         let image = dictionary["image"] as! String
-                        print("\(fname), \(lname)")
-                        print("Living at \(address)")
-                        print(image)
+                        //print("\(fname), \(lname)")
+                        //print("Living at \(address)")
+                        //print(image)
                         
                         let profile:Profile = Profile()
                         profile.fname = fname
