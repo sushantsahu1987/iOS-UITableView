@@ -34,6 +34,26 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableCell.labelName.text = "\( (profile?.fname)! ) \((profile?.lname)!)"
         tableCell.labelAddress.text = profile?.address!
         
+        let url = URL(string: (profile?.image)!)
+        
+        URLSession.shared.dataTask(with: url!) {
+            (data,response,error) in
+            
+            if error != nil {
+                print(error!)
+                return
+            }
+            
+            DispatchQueue.main.async {
+                tableCell.imageProfile.image = UIImage(data: data!)
+            }
+            
+            
+            
+            
+        }.resume()
+        
+        
         return tableCell
     }
     
@@ -60,7 +80,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             (data,response,error) in
             
             if(error != nil) {
-                print(error)
+                print(error!)
             }else {
                 print("success !!")
                 /*if let str = String(data: data!, encoding: String.Encoding.utf8) {
