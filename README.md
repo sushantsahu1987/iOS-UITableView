@@ -9,7 +9,7 @@ The example would contain
 - Custom Cell
 - A url session example
 - Lazy loading of images 
-
+- Image caching added 
 
 
 ===== Still in progress =====
