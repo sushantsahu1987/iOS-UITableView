@@ -8,8 +8,11 @@ found at https://github.com/sushantsahu1987/ExpressJS-FakeDataGenerator
 The example would contain
 - Custom Cell
 - A url session example
-- Lazy loading of images
-- Detect if network is available
+- Lazy loading of images 
+
 
 
 ===== Still in progress =====
+- Detect if network is available
+
+
