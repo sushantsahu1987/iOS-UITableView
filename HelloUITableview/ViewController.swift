@@ -8,14 +8,46 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableProfile.dataSource = self
+        tableProfile.delegate = self
+        
         requestProfile()
         
         
     }
+    
+    var profileList : [Profile]?
+    @IBOutlet weak var tableProfile: UITableView!
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     
+        let tableCell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! CustomTableViewCell
+        
+        let profile = profileList?[indexPath.row]
+        
+        tableCell.labelName.text = "\( (profile?.fname)! ) \((profile?.lname)!)"
+        tableCell.labelAddress.text = profile?.address!
+        
+        return tableCell
+    }
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if let count = profileList?.count {
+            return count
+        }
+        
+        return 0
+    }
+    
+    
     
     func requestProfile() {
         
@@ -40,6 +72,8 @@ class ViewController: UIViewController {
                     let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
                     //print(json)
                     
+                    self.profileList = [Profile]()
+                    
                     for dictionary in json as! [[String:AnyObject]] {
                         let fname = dictionary["fname"] as! String
                         let lname = dictionary["lname"] as! String
@@ -48,7 +82,24 @@ class ViewController: UIViewController {
                         print("\(fname), \(lname)")
                         print("Living at \(address)")
                         print(image)
+                        
+                        let profile:Profile = Profile()
+                        profile.fname = fname
+                        profile.lname = lname
+                        profile.address = address
+                        profile.image = image
+                        self.profileList?.append(profile)
+                        
+                        
                     }
+                    
+                    print("count : \(self.profileList?.count)")
+                    
+                    DispatchQueue.main.async {
+                        self.tableProfile.reloadData()
+                    }
+                    
+                    
                     
                     
                 } catch let jsonError {

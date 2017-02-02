@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,14 +19,78 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="107" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GJ4-9u-H5D">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="CustomCell" rowHeight="120" id="5ec-cr-ZJh" customClass="CustomTableViewCell" customModule="HelloUITableview" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="120"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5ec-cr-ZJh" id="Ado-36-O15">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="119"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="iOC-jJ-jIq">
+                                                    <rect key="frame" x="8" y="10" width="100" height="100"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="100" id="GFl-rj-ofd"/>
+                                                        <constraint firstAttribute="width" constant="100" id="qi9-hG-CZd"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jacob Altair" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4aN-Ti-8UR">
+                                                    <rect key="frame" x="116" y="10" width="196" height="18"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3rd Avenue, New York" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iJz-6s-dd7">
+                                                    <rect key="frame" x="116" y="32" width="196" height="17"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="iOC-jJ-jIq" firstAttribute="centerY" secondItem="Ado-36-O15" secondAttribute="centerY" id="3wx-c3-M6i"/>
+                                                <constraint firstItem="iJz-6s-dd7" firstAttribute="trailing" secondItem="Ado-36-O15" secondAttribute="trailingMargin" id="49V-Ih-dkj"/>
+                                                <constraint firstItem="iJz-6s-dd7" firstAttribute="top" secondItem="4aN-Ti-8UR" secondAttribute="bottom" constant="4" id="6gs-2O-zJl"/>
+                                                <constraint firstItem="iJz-6s-dd7" firstAttribute="leading" secondItem="iOC-jJ-jIq" secondAttribute="trailing" constant="8" id="DFH-39-4o8"/>
+                                                <constraint firstItem="iOC-jJ-jIq" firstAttribute="leading" secondItem="Ado-36-O15" secondAttribute="leading" constant="8" id="PSs-yr-gn1"/>
+                                                <constraint firstItem="4aN-Ti-8UR" firstAttribute="leading" secondItem="iOC-jJ-jIq" secondAttribute="trailing" constant="8" id="Tab-k1-tOT"/>
+                                                <constraint firstItem="4aN-Ti-8UR" firstAttribute="trailing" secondItem="Ado-36-O15" secondAttribute="trailingMargin" id="dBt-Ol-soC"/>
+                                                <constraint firstItem="4aN-Ti-8UR" firstAttribute="top" secondItem="Ado-36-O15" secondAttribute="topMargin" constant="2" id="ndk-Gy-BxU"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="imageProfile" destination="iOC-jJ-jIq" id="dGc-qf-TvT"/>
+                                            <outlet property="labelAddress" destination="iJz-6s-dd7" id="o0y-58-2Qw"/>
+                                            <outlet property="labelName" destination="4aN-Ti-8UR" id="CRL-A5-l68"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="GJ4-9u-H5D" secondAttribute="trailing" id="Lw1-rg-GGO"/>
+                            <constraint firstItem="GJ4-9u-H5D" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="OgW-3i-Bjy"/>
+                            <constraint firstItem="GJ4-9u-H5D" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="20" id="gCp-ZC-7Xe"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="GJ4-9u-H5D" secondAttribute="bottom" id="hIe-9h-R16"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableProfile" destination="GJ4-9u-H5D" id="W1f-mU-85U"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-79.200000000000003" y="137.18140929535232"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="profile" width="350" height="218"/>
+    </resources>
 </document>
