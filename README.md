@@ -10,9 +10,6 @@ The example would contain
 - A url session example
 - Lazy loading of images 
 - Image caching added 
-
-
-===== Still in progress =====
 - Detect if network is available
 
 
